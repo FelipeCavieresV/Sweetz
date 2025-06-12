@@ -1,35 +1,30 @@
-import { Geist, Geist_Mono } from "next/font/google";
-import "./globals.css";
+// src/app/layout.tsx
+'use client'
+
+import './globals.css'
 import { Poppins } from 'next/font/google'
+import { usePathname } from 'next/navigation'
+import Navbar from './componentes/inicio/navbar'
 
 const poppins = Poppins({
   subsets: ['latin'],
   weight: ['400', '500', '600'],
 })
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
-
-export const metadata = {
-  title: "Sweetz",
-  description: "El lado mas oculto de nosotros",
-};
-
 export default function RootLayout({ children }) {
+  const pathname = usePathname()
+
+  // No mostrar el navbar en la página de login ("/")
+  const showNavbar = pathname !== '/'
+
   return (
-    <html lang="en">
-      <body
-  className={`${poppins.className} ${geistMono.variable} antialiased`}
->
-  {children}
+    <html lang="es">
+      <body className={`${poppins.className} antialiased`}>
+        {showNavbar && <Navbar />}
+        <main className={showNavbar ? 'pt-[72px] min-h-screen' : 'min-h-screen'}>
+          {children}
+        </main>
       </body>
     </html>
-  );
+  )
 }
