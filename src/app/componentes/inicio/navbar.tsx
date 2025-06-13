@@ -44,7 +44,7 @@ export default function Navbar() {
     {/* Botón izquierdo - Editar perfil */}
     <div className="z-30">
       <button
-        className="bg-[#8e24aa] text-white text-xs sm:text-sm px-4 py-2 rounded-full hover:bg-[#9c27b0] transition cursor-pointer"
+      className="bg-[#8e24aa] text-white text-[10px] sm:text-sm px-3 py-1.5 sm:px-4 sm:py-2 rounded-full hover:bg-[#9c27b0] transition cursor-pointer"
         onClick={() => router.push('/views/home/profile')} // ajusta la ruta según corresponda
       >
         ✏️ Editar perfil
@@ -53,11 +53,11 @@ export default function Navbar() {
 
     {/* Logo central */}
     <div className="absolute inset-0 flex justify-center items-center pointer-events-none">
-      <img
-        src="/logosw.png"
-        alt="Logo Sweetz"
-        className="h-10 sm:h-10 md:h-12 object-contain drop-shadow-[0_5px_10px_rgba(156,39,176,0.5)] hover:drop-shadow-[0_5px_20px_rgba(156,39,176,0.8)] transition-all duration-300 ease-in-out"
-      />
+      <h4
+          className={`${dancing.className} text-5xl sm:text-5xl md:text-5xl text-[#8e24aa] mb-2 text-center tracking-wide drop-shadow-[0_5px_10px_rgba(156,39,176,0.5)] hover:drop-shadow-[0_5px_20px_rgba(156,39,176,0.8)] transition-all duration-300 ease-in-out`}
+        >
+          Sweetz
+        </h4>
     </div>
 
     {/* Íconos derecha */}
