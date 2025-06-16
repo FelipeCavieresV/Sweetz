@@ -35,10 +35,10 @@ export default function EditarPerfilPage() {
 
   return (
     <>
-      <main className="min-h-screen bg-[#f9fbfc] text-gray-700 flex items-center justify-center p-4">
+       <main className="min-h-screen bg-[#f9fbfc] text-gray-700 flex md:items-center md:justify-center p-2 md:p-4">
         <div className="flex flex-col md:flex-row w-full max-w-6xl bg-white rounded-lg shadow overflow-hidden">
           {/* Sidebar en escritorio */}
-          <div className="w-full md:w-64 p-4 border-r border-gray-200 md:border-r-0 md:pr-0">
+          <div className="w-full md:w-64 md:h-screen sticky top-0 p-4 border-r border-gray-200 bg-white overflow-y-auto">
             <SidebarPerfil />
           </div>
 
