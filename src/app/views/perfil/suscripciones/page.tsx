@@ -12,13 +12,14 @@ export default function SuscripcionesPage() {
 
  return (
   <>
-    <main className="min-h-screen bg-[#f9fbfc] text-gray-700 flex items-center justify-center p-4">
+    <main className="min-h-screen bg-[#f9fbfc] text-gray-700 flex md:items-center md:justify-center p-2 md:p-4">
+
       <div className="flex flex-col md:flex-row w-full max-w-6xl w-full max-w-6xl bg-white rounded-lg shadow overflow-hidden">
         {/* Sidebar en escritorio */}
 
-        <div className="w-full md:w-64 p-4 border-r border-gray-200 md:border-r-0 md:pr-0">
-        <SidebarPerfil />
-        </div>
+         <div className="w-full md:w-64 md:h-screen sticky top-0 p-4 border-r border-gray-200 bg-white overflow-y-auto">
+            <SidebarPerfil />
+        </div>   
 
         {/* Formulario principal */}
         <section className="flex-1 w-full p-4 md:p-10 ">
@@ -54,110 +55,7 @@ export default function SuscripcionesPage() {
                         fin: '11/12/2024',
                         estado: 'SUSCRITO'
                     },
-                    {
-                        avatar: '/avatar3.jpg',
-                        name: '🔥💋💄 M🐄🐄✨',
-                        fecha: '08/04/2024',
-                        intervalo: 'Mensual',
-                        fin: '08/05/2024',
-                        estado: 'CANCELADO'
-                    },
-                    {
-                        avatar: '/avatar1.jpg',
-                        name: 'Emma Cole and Jhon 🖤',
-                        fecha: '16/12/2024',
-                        intervalo: 'Mensual',
-                        fin: '16/01/2025',
-                        estado: 'CANCELADO'
-                    },
-                    {
-                        avatar: '/avatar2.jpg',
-                        name: '💋',
-                        fecha: '11/11/2024',
-                        intervalo: 'Mensual',
-                        fin: '11/12/2024',
-                        estado: 'CANCELADO'
-                    },
-                    {
-                        avatar: '/avatar3.jpg',
-                        name: '🔥💋💄 m 🐄🐄✨',
-                        fecha: '08/04/2024',
-                        intervalo: 'Mensual',
-                        fin: '08/05/2024',
-                        estado: 'CANCELADO'
-                    },
-                    {
-                        avatar: '/avatar1.jpg',
-                        name: 'asdasd🖤',
-                        fecha: '16/12/2024',
-                        intervalo: 'Mensual',
-                        fin: '16/01/2025',
-                        estado: 'SUSCRITO'
-                    },
-                    {
-                        avatar: '/avatar2.jpg',
-                        name: ' 💋',
-                        fecha: '11/11/2024',
-                        intervalo: 'Mensual',
-                        fin: '11/12/2024',
-                        estado: 'CANCELADO'
-                    },
-                    {
-                        avatar: '/avatar3.jpg',
-                        name: '🔥💋 M 🐄🐄✨',
-                        fecha: '08/04/2024',
-                        intervalo: 'Mensual',
-                        fin: '08/05/2024',
-                        estado: 'CANCELADO'
-                    },
-                    {
-                        avatar: '/avatar1.jpg',
-                        name: 'Jhon 🖤',
-                        fecha: '16/12/2024',
-                        intervalo: 'Mensual',
-                        fin: '16/01/2025',
-                        estado: 'CANCELADO'
-                    },
-                    {
-                        avatar: '/avatar2.jpg',
-                        name: ' 💋',
-                        fecha: '11/11/2024',
-                        intervalo: 'Mensual',
-                        fin: '11/12/2024',
-                        estado: 'CANCELADO'
-                    },
-                    {
-                        avatar: '/avatar3.jpg',
-                        name: '🔥💋asd 🐄🐄✨',
-                        fecha: '08/04/2024',
-                        intervalo: 'Mensual',
-                        fin: '08/05/2024',
-                        estado: 'CANCELADO'
-                    },
-                    {
-                        avatar: '/avatar1.jpg',
-                        name: 'asdfasd 🖤',
-                        fecha: '16/12/2024',
-                        intervalo: 'Mensual',
-                        fin: '16/01/2025',
-                        estado: 'CANCELADO'
-                    },
-                    {
-                        avatar: '/avatar2.jpg',
-                        name: 'asdfasdfar 💋',
-                        fecha: '11/11/2024',
-                        intervalo: 'Mensual',
-                        fin: '11/12/2024',
-                        estado: 'CANCELADO'
-                    },
-                    {
-                        avatar: '/avatar3.jpg',
-                        name: '🔥💋💄 Masdf 🐄🐄✨',
-                        fecha: '08/04/2024',
-                        intervalo: 'Mensual',
-                        fin: '08/05/2024',
-                        estado: 'CANCELADO'
-                    }
+                    
                     ].map((sub, i) => (
                     <tr key={i} className="hover:bg-gray-50">
                         <td className="flex items-center gap-3 p-4">

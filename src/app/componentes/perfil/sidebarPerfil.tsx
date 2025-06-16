@@ -37,11 +37,12 @@ export default function SidebarPerfil() {
   };
 
   const getItemClass = (label: string) =>
-    `cursor-pointer flex items-center gap-4 rounded px-2 py-1 transition ${
-      activeItem === label
-        ? 'text-white bg-[#9c27b0] font-semibold hover:brightness-110'
-        : 'text-gray-600 hover:text-gray-800 hover:bg-gray-100'
-    }`;
+  `cursor-pointer flex items-center gap-4 rounded px-3 py-2 transition text-base
+   ${
+     activeItem === label
+       ? 'text-white bg-[#9c27b0] font-semibold hover:brightness-110'
+       : 'text-gray-600 hover:text-gray-800 hover:bg-gray-100'
+   }`;
 
   return (
     <>
