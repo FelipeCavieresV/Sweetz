@@ -1,91 +1,87 @@
 'use client';
 
 import { useState } from 'react';
-import { useRouter } from 'next/navigation'; // para App Router
+import { useRouter } from 'next/navigation';
 import { motion, AnimatePresence } from 'framer-motion';
 import FooterPerfil from '../../../componentes/perfil/footerPerfil';
 import SidebarPerfil from '../../../componentes/perfil/sidebarPerfil';
-import router from 'next/router';
 
 export default function SuscripcionesPage() {
-  
-
- return (
-  <>
-    <main className="min-h-screen bg-[#f9fbfc] text-gray-700 flex md:items-center md:justify-center p-2 md:p-4">
-
-      <div className="flex flex-col md:flex-row w-full max-w-6xl w-full max-w-6xl bg-white rounded-lg shadow overflow-hidden">
-        {/* Sidebar en escritorio */}
-
-         <div className="w-full md:w-64 md:h-screen sticky top-0 p-4 border-r border-gray-200 bg-white overflow-y-auto">
-            <SidebarPerfil />
-        </div>   
-
-        {/* Formulario principal */}
-        <section className="flex-1 w-full p-4 md:p-10 ">
-            <h2 className="text-2xl font-bold text-gray-800 flex items-center gap-2 mb-1">📄 Mis suscripciones</h2>
-            <p className="text-gray-500 text-sm mb-6">Usuarios a los que te has suscrito a su contenido</p>
-
-            <div className="overflow-x-auto shadow rounded-lg max-h-[820px] overflow-y-auto">
-                <table className="min-w-full bg-white border border-gray-200 text-sm text-left">
-                <thead className="bg-gray-100 text-gray-600 uppercase text-xs">
-                    <tr>
-                    <th className="p-4">Suscrito</th>
-                    <th className="p-4">Fecha</th>
-                    <th className="p-4">Intervalo</th>
-                    <th className="p-4">Termina en</th>
-                    <th className="p-4">Estado</th>
-                    </tr>
-                </thead>
-                <tbody className="text-gray-700 divide-y divide-gray-200">
-                    {[
-                    {
-                        avatar: '/avatar1.jpg',
-                        name: 'Jhon 🖤',
-                        fecha: '16/12/2024',
-                        intervalo: 'Mensual',
-                        fin: '16/01/2025',
-                        estado: 'CANCELADO'
-                    },
-                    {
-                        avatar: '/avatar2.jpg',
-                        name: ' 💋',
-                        fecha: '11/11/2024',
-                        intervalo: 'Mensual',
-                        fin: '11/12/2024',
-                        estado: 'SUSCRITO'
-                    },
-                    
-                    ].map((sub, i) => (
-                    <tr key={i} className="hover:bg-gray-50">
-                        <td className="flex items-center gap-3 p-4">
-                        <img
-                            src={sub.avatar}
-                            alt={sub.name}
-                            className="w-10 h-10 rounded-full object-cover border"
-                        />
-                        <span className="text-[#9c27b0] font-semibold">{sub.name}</span>
-                        </td>
-                        <td className="p-4">{sub.fecha}</td>
-                        <td className="p-4">{sub.intervalo}</td>
-                        <td className="p-4">{sub.fin}</td>
-                        <td className="p-4">
-                        <span className="bg-red-100 text-red-700 px-3 py-1 rounded-full text-xs font-semibold">
-                            {sub.estado}
-                        </span>
-                        </td>
-                    </tr>
-                    ))}
-                </tbody>
-                </table>
+  return (
+    <>
+      <main className="min-vh-100 bg-light text-dark py-4 px-2">
+        <div className="container">
+          <div className="row justify-content-center">
+            {/* Sidebar */}
+            <div className="col-md-3    ">
+              <SidebarPerfil />
             </div>
-            </section>
 
+            {/* Contenido principal */}
+            <div className="col-md-8 col-lg-7">
+              <div className="px-2 px-md-0">
+                <h2 className="h5 fw-bold mb-2 d-flex align-items-center gap-2">📄 Mis suscripciones</h2>
+                <p className="text-muted small mb-3">Usuarios a los que te has suscrito a su contenido</p>
 
-      </div>
+                <div className="table-responsive rounded-4 overflow-hidden shadow-sm border border-1 border-light-subtle bg-white">
+                  <table className="table table-striped table-borderless align-middle mb-0">
+                    <thead className="bg-light text-center text-uppercase small text-secondary border-bottom">
+                      <tr>
+                        <th style={{ width: '25%' }}>Suscrito</th>
+                        <th style={{ width: '15%' }}>Fecha</th>
+                        <th style={{ width: '15%' }}>Intervalo</th>
+                        <th style={{ width: '20%' }}>Termina en</th>
+                        <th style={{ width: '15%' }}>Estado</th>
+                      </tr>
+                    </thead>
+                    <tbody className="text-center">
+                      {[
+                        {
+                          avatar: '/avatar1.jpg',
+                          name: 'Jhon 🖤',
+                          fecha: '16/12/2024',
+                          intervalo: 'Mensual',
+                          fin: '16/01/2025',
+                          estado: 'CANCELADO'
+                        },
+                        {
+                          avatar: '/avatar2.jpg',
+                          name: ' 💋',
+                          fecha: '11/11/2024',
+                          intervalo: 'Mensual',
+                          fin: '11/12/2024',
+                          estado: 'SUSCRITO'
+                        }
+                      ].map((sub, i) => (
+                        <tr key={i} className="align-middle">
+                          <td className="d-flex align-items-center gap-3 ps-3 py-3">
+                            <img
+                              src={sub.avatar}
+                              alt={sub.name}
+                              className="rounded-circle border border-2"
+                              style={{ width: '40px', height: '40px', objectFit: 'cover' }}
+                            />
+                            <span className="fw-semibold text-primary-emphasis small">{sub.name}</span>
+                          </td>
+                          <td className="text-muted small">{sub.fecha}</td>
+                          <td className="text-muted small">{sub.intervalo}</td>
+                          <td className="text-muted small">{sub.fin}</td>
+                          <td>
+                            <span className={`badge px-3 py-2 rounded-pill fw-medium small ${sub.estado === 'CANCELADO' ? 'bg-danger-subtle text-danger' : 'bg-success-subtle text-success'}`}>
+                              {sub.estado}
+                            </span>
+                          </td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
 
-    </main>
-    
+          </div>
+        </div>
+      </main>
       <FooterPerfil />
     </>
   );

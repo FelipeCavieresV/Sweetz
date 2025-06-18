@@ -12,22 +12,19 @@ import {
   Sun,
   User,
   UserPlus,
-  Compass
+  Compass,
 } from 'lucide-react'
 import { useRouter } from 'next/navigation'
 import { useState, useRef, useEffect } from 'react'
 import { Dancing_Script } from 'next/font/google'
 import { Poppins } from 'next/font/google'
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence } from 'framer-motion'
 import Publicaciones from '../../../componentes/dashboard/publicaciones'
 import SidebarDashboard from '../../../componentes/dashboard/sidebarDashboard'
-
+import ExplorarCreadores from '../../../componentes/dashboard/explorarCreadores'
 
 const dancing = Dancing_Script({ subsets: ['latin'], weight: ['700'] })
-const poppins = Poppins({
-  subsets: ['latin'],
-  weight: ['400', '500', '600'],
-})
+const poppins = Poppins({ subsets: ['latin'], weight: ['400', '500', '600'] })
 
 export default function Dashboard() {
   const router = useRouter()
@@ -46,59 +43,50 @@ export default function Dashboard() {
     }
   }, [])
 
-    const creators = [
-      {
-      name: 'Daniela Ruiz',
-      username: '@Danielaoficialcl',
-      stats: ['326', '796', '188', '2'],
-      bg: '/images/bgdaniela.jpeg',   
-      avatar: '/images/daniela.png'    
-    },
-    {
-      name: 'Aliluffi',
-      username: '@Aliluffi',
-      stats: ['32', '27', '24', '0'],
-      bg: '/images/bgdaniela.jpeg',   
-      avatar: '/images/daniela.png'   
-    },
-    {
-      name: 'Dannyy Blonde',
-      username: '@Dannyyblonde',
-      stats: ['560', '589', '453', '19'],
-      bg: '/images/bgdaniela.jpeg',   
-      avatar: '/images/daniela.png'   
-    },
-    {
-      name: 'Nicoblock',
-      username: '@Nicoblock',
-      stats: ['1.3k', '1.1k', '291', '0'],
-      bg: '/images/bgdaniela.jpeg',   
-      avatar: '/images/daniela.png'   
-    }
-  ]
-
   return (
-    <div className="min-h-screen bg-white pt-[32px]">
-      <div className="max-w-7xl mx-auto mt-5 px-4">
-        <div className="flex flex-col md:flex-row justify-center gap-4">
+    <div className="container-lg pt-2">
+  <div className="row h-100">
+        {/* Columna izquierda */}
+        <div className="col-md-2">
           <SidebarDashboard />
-          
+        </div>
 
-          {/* Contenido principal */}
-          <div className="flex-1">
-            <Publicaciones />
-          </div>
+        {/* Columna central */}
+        {/* Columna central con scroll solo en publicaciones */}
+        <div
+          className="col-md-6 p-0 second"
+          style={{
+            height: 'calc(100vh - 80px)', // ajusta según tu navbar
+            overflowY: 'scroll', // sigue scrollable
+            paddingRight: '8px',
 
+            // Oculta scrollbars
+            scrollbarWidth: 'none',        // Firefox
+            msOverflowStyle: 'none',       // IE y Edge
+          }}
+        >
+          <style jsx>{`
+            .second::-webkit-scrollbar {
+              display: none; /* Chrome, Safari */
+            }
+          `}</style>
+          <Publicaciones />
+        </div>
+
+        {/* Columna derecha */}
+        <div className="col-md-4  mb-4  first">
+          <ExplorarCreadores />
         </div>
       </div>
     </div>
+
   )
 }
 
 function DropdownItem({
   icon,
   label,
-  onClick
+  onClick,
 }: {
   icon: React.ReactNode
   label: string
@@ -107,7 +95,8 @@ function DropdownItem({
   return (
     <button
       onClick={onClick}
-      className="flex items-center w-full px-4 py-2 text-gray-800 hover:text-[#8e24aa] hover:bg-[#e1dbe0] transition-colors duration-200 text-left gap-3"
+      className="btn btn-link text-start text-dark w-100 d-flex align-items-center gap-2 px-3 py-2 text-decoration-none"
+      style={{ fontSize: '14px' }}
     >
       {icon}
       <span>{label}</span>

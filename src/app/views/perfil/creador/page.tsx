@@ -1,91 +1,66 @@
 'use client';
 
 import { useState } from 'react';
-import { useRouter } from 'next/navigation'; // para App Router
+import { useRouter } from 'next/navigation';
 import { motion, AnimatePresence } from 'framer-motion';
 import FooterPerfil from '../../../componentes/perfil/footerPerfil';
 import SidebarPerfil from '../../../componentes/perfil/sidebarPerfil';
-import router from 'next/router';
 
 export default function CreadorPage() {
-  
-
- return (
-  <>
-    <main className="min-h-screen bg-[#f9fbfc] text-gray-700 flex md:items-center md:justify-center p-2 md:p-4">
-      <div className="flex flex-col md:flex-row w-full max-w-6xl w-full max-w-6xl bg-white rounded-lg shadow overflow-hidden">
-        {/* Sidebar en escritorio */}
-
-       <div className="w-full md:w-64 md:h-screen sticky top-0 p-4 border-r border-gray-200 bg-white overflow-y-auto">
-          <SidebarPerfil />
-        </div>           
-        
-
-        {/* Formulario principal */}
-        <section className="flex-1 w-full p-4 md:p-10 ">
-            {/* Título principal */}
-            <h2 className="text-2xl font-bold text-gray-700 mb-1 flex items-center gap-2">✔ Verificar cuenta</h2>
-            <p className="text-sm text-gray-500 mb-6">Ingrese su dirección, ciudad, código postal y adjunte foto de su cédula de identidad</p>
-
-            {/* Alerta amarilla */}
-            <div className="bg-yellow-100 border border-yellow-400 text-yellow-800 text-sm rounded-lg p-4 mb-6">
-                ⚠️ Si eres chilena(o) solo debes enviar foto de la parte frontal de tu cédula. Envía una foto perfectamente legible de tu cédula de identidad o pasaporte (recomendado), no se aceptarán fotocopias, fotos borrosas o en mala calidad u otros documentos. Si tu cuenta es en pareja, debes enviar las dos cédulas de identidad en una sola foto.
+  return (
+    <>
+      <main className="min-vh-100 bg-light text-dark py-4 px-2">
+        <div className="container">
+          <div className="row justify-content-center">
+            {/* Sidebar */}
+            <div className="col-md-3">
+              <SidebarPerfil />
             </div>
 
-            {/* Formulario de verificación */}
-            <form className="space-y-4">
+            {/* Formulario principal */}
+            <div className="col-md-7">
+              <h2 className="h5 fw-bold text-dark mb-1">✔ Verificar cuenta</h2>
+              <p className="text-muted mb-4">Ingrese su dirección, ciudad, código postal y adjunte foto de su cédula de identidad</p>
 
-                <input
-                type="text"
-                placeholder="Pais"
-                className="w-full border border-gray-300 p-2 rounded focus:outline-none focus:ring-2 focus:ring-[#9c27b0]"
-                />
-                <input
-                type="text"
-                placeholder="Dirección"
-                className="w-full border border-gray-300 p-2 rounded focus:outline-none focus:ring-2 focus:ring-[#9c27b0]"
-                />
-                <input
-                type="text"
-                placeholder="Ciudad"
-                className="w-full border border-gray-300 p-2 rounded focus:outline-none focus:ring-2 focus:ring-[#9c27b0]"
-                />
-                <input
-                type="text"
-                placeholder="Comuna"
-                className="w-full border border-gray-300 p-2 rounded focus:outline-none focus:ring-2 focus:ring-[#9c27b0]"
-                />
-                <input
-                type="text"
-                placeholder="Codigo Postal"
-                className="w-full border border-gray-300 p-2 rounded focus:outline-none focus:ring-2 focus:ring-[#9c27b0]"
-                />
-                
-                {/* Subir imagen */}
-                <div className="border-2 border-dotted border-[#9c27b0] rounded-lg p-4 text-center text-sm text-[#9c27b0] bg-white">
-                <label className="cursor-pointer">
-                    <span className="font-medium">Subir imagen (JPG, PNG, GIF) o ZIP – Máximo: 30MB</span>
-                    <input type="file" className="hidden" />
-                </label>
-                <p className="text-gray-400 mt-1 text-xs">
-                    Sube una foto de tu cédula de identidad o pasaporte donde se vea claramente tu número de identificación y tu fecha de nacimiento.
-                </p>
+              <div className="alert alert-warning small mb-4">
+                ⚠️ Si eres chilena(o) solo debes enviar foto de la parte frontal de tu cédula. Envía una foto perfectamente legible de tu cédula de identidad o pasaporte (recomendado), no se aceptarán fotocopias, fotos borrosas o en mala calidad u otros documentos. Si tu cuenta es en pareja, debes enviar las dos cédulas de identidad en una sola foto.
+              </div>
+
+              <form className="mb-5">
+                <div className="mb-3">
+                  <input type="text" placeholder="País" className="form-control" />
+                </div>
+                <div className="mb-3">
+                  <input type="text" placeholder="Dirección" className="form-control" />
+                </div>
+                <div className="mb-3">
+                  <input type="text" placeholder="Ciudad" className="form-control" />
+                </div>
+                <div className="mb-3">
+                  <input type="text" placeholder="Comuna" className="form-control" />
+                </div>
+                <div className="mb-4">
+                  <input type="text" placeholder="Código Postal" className="form-control" />
                 </div>
 
-                {/* Botón de envío */}
-                <button
-                type="submit"
-                className="w-full bg-green-500 hover:bg-green-600 text-white font-semibold py-3 rounded-full transition"
-                >
-                Enviar para aprobación
+                <div className="border border-2 border-dashed rounded p-3 text-center text-secondary mb-4">
+                  <label className="form-label d-block">
+                    <span className="fw-semibold">Subir imagen (JPG, PNG, GIF) o ZIP – Máximo: 30MB</span>
+                    <input type="file" className="form-control mt-2" />
+                  </label>
+                  <p className="text-muted small mt-2">
+                    Sube una foto de tu cédula de identidad o pasaporte donde se vea claramente tu número de identificación y tu fecha de nacimiento.
+                  </p>
+                </div>
+
+                <button type="submit" className="btn btn-success w-100 fw-semibold py-2">
+                  Enviar para aprobación
                 </button>
-            </form>
-            </section>
-
-      </div>
-
-    </main>
-    
+              </form>
+            </div>
+          </div>
+        </div>
+      </main>
       <FooterPerfil />
     </>
   );

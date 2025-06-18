@@ -15,7 +15,6 @@ export default function PagosPage() {
     { id: 2, fecha: '2025-05-15', monto: 15000 },
   ]);
 
-  // Cargar datos almacenados previamente
   useEffect(() => {
     const datosGuardados = localStorage.getItem('datosPago');
     if (datosGuardados) {
@@ -52,109 +51,114 @@ export default function PagosPage() {
       return;
     }
 
-    const datos = {
-      cuenta,
-      banco,
-      tipoCuenta,
-      valorSuscripcion,
-    };
-
+    const datos = { cuenta, banco, tipoCuenta, valorSuscripcion };
     localStorage.setItem('datosPago', JSON.stringify(datos));
     alert('✅ Tus datos bancarios y valor de suscripción han sido guardados correctamente.');
   };
 
   return (
     <>
-      <main className="min-h-screen bg-[#f9fbfc] text-gray-700 flex md:items-center md:justify-center p-2 md:p-4">
-        <div className="flex flex-col md:flex-row w-full max-w-6xl bg-white rounded-lg shadow overflow-hidden">
-          <div className="w-full md:w-64 md:h-screen sticky top-0 p-4 border-r border-gray-200 bg-white overflow-y-auto">
-            <SidebarPerfil />
-          </div>
-
-          <section className="flex-1 w-full p-4 md:p-10 space-y-6">
-            <h2 className="text-2xl font-bold text-gray-800 mb-2">💰 Recibir Pagos</h2>
-            <p className="text-sm text-gray-500">
-              Administra tus métodos de pago, guarda tu cuenta bancaria y realiza retiros de tus ganancias.
-            </p>
-
-            {/* Formulario de datos bancarios */}
-            <div className="border border-gray-200 p-4 rounded-lg">
-              <h3 className="text-sm font-semibold text-gray-700 mb-2">Datos bancarios</h3>
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                <input
-                  type="text"
-                  placeholder="Banco (ej: Banco Estado)"
-                  value={banco}
-                  onChange={(e) => setBanco(e.target.value)}
-                  className="border border-gray-300 p-2 rounded focus:outline-none focus:ring-1 focus:ring-[#9c27b0]"
-                />
-                <input
-                  type="text"
-                  placeholder="Número de cuenta"
-                  value={cuenta}
-                  onChange={(e) => setCuenta(e.target.value)}
-                  className="border border-gray-300 p-2 rounded focus:outline-none focus:ring-1 focus:ring-[#9c27b0]"
-                />
-                <select
-                  value={tipoCuenta}
-                  onChange={(e) => setTipoCuenta(e.target.value)}
-                  className="border border-gray-300 p-2 rounded focus:outline-none focus:ring-1 focus:ring-[#9c27b0]"
-                >
-                  <option value="">Tipo de cuenta</option>
-                  <option value="vista">Cuenta vista</option>
-                  <option value="corriente">Cuenta corriente</option>
-                  <option value="rut">Cuenta RUT</option>
-                </select>
-              </div>
-
-              <button
-                onClick={manejarGuardarDatos}
-                className="mt-4 bg-[#8e24aa] text-white px-4 py-2 rounded hover:brightness-110 transition"
-              >
-                Guardar datos bancarios
-              </button>
+      <main className="min-vh-100 bg-light text-dark py-4 px-2">
+        <div className="container">
+          <div className="row justify-content-center">
+            {/* Sidebar */}
+            <div className="col-md-3">
+              <SidebarPerfil />
             </div>
 
-            {/* Monto disponible */}
-            <div className="bg-[#f3e8f7] p-4 rounded-lg shadow border border-[#e0cfe8] space-y-3">
-              <p className="text-gray-600 mb-1">Monto disponible:</p>
-              <p className="text-3xl font-bold text-[#9c27b0]">${montoDisponible.toLocaleString()}</p>
-              <button
-                onClick={manejarRetiro}
-                disabled={montoDisponible === 0}
-                className="bg-[#9c27b0] text-white px-4 py-2 rounded hover:brightness-110 transition disabled:opacity-50"
-              >
-                Retirar fondos
-              </button>
-            </div>
-
-            {/* Comisión explicativa */}
-            <div className="border border-gray-200 p-4 rounded-lg bg-[#fcf8ff]">
-              <h3 className="text-sm font-semibold text-gray-700 mb-2">Comisión por suscripción</h3>
-              <p className="text-sm text-gray-600 mb-2">
-                Se aplica una comisión por cada suscripción:
-              </p>
-              <ul className="list-disc list-inside text-sm text-gray-600">
-                <li>🔹 Si el valor es menor o igual a $6 USD, se descuenta un <strong>5%</strong>.</li>
-               <li>🔹 Si el valor es mayor a $6 USD, se descuenta un <strong>7%</strong>.</li>
-              </ul>
-
-              <div className="mt-4">
-                <label className="text-sm text-gray-700">Valor de tu suscripción ($USD):</label>
-                <input
-                  type="number"
-                  min="1"
-                  step="0.01"
-                  value={valorSuscripcion}
-                  onChange={(e) => setValorSuscripcion(parseFloat(e.target.value))}
-                  className="mt-1 block w-full md:w-1/2 border border-gray-300 p-2 rounded focus:outline-none focus:ring-1 focus:ring-[#9c27b0]"
-                />
-                <p className="text-xs text-gray-500 mt-1">
-                  Recibirás aproximadamente: <strong>${calcularMontoFinal(valorSuscripcion).toFixed(2)}</strong> por suscriptor.
+            {/* Contenido principal */}
+            <div className="col-md-8 col-lg-7">
+              <div className="px-2 px-md-0">
+                <h2 className="h5 fw-bold mb-2 d-flex align-items-center gap-2">💰 Recibir Pagos</h2>
+                <p className="text-muted small mb-4">
+                  Administra tus métodos de pago, guarda tu cuenta bancaria y realiza retiros de tus ganancias.
                 </p>
+
+                {/* Datos bancarios */}
+                <div className="bg-white border rounded-4 shadow-sm p-3 mb-3">
+                  <h5 className="fw-semibold mb-3 fs-6">Datos bancarios</h5>
+                  <div className="row g-3">
+                    <div className="col-md-6">
+                      <input
+                        type="text"
+                        className="form-control"
+                        placeholder="Banco (ej: Banco Estado)"
+                        value={banco}
+                        onChange={(e) => setBanco(e.target.value)}
+                      />
+                    </div>
+                    <div className="col-md-6">
+                      <input
+                        type="text"
+                        className="form-control"
+                        placeholder="Número de cuenta"
+                        value={cuenta}
+                        onChange={(e) => setCuenta(e.target.value)}
+                      />
+                    </div>
+                    <div className="col-md-6">
+                      <select
+                        className="form-select"
+                        value={tipoCuenta}
+                        onChange={(e) => setTipoCuenta(e.target.value)}
+                      >
+                        <option value="">Tipo de cuenta</option>
+                        <option value="vista">Cuenta vista</option>
+                        <option value="corriente">Cuenta corriente</option>
+                        <option value="rut">Cuenta RUT</option>
+                      </select>
+                    </div>
+                  </div>
+                  <button
+                    onClick={manejarGuardarDatos}
+                    className="btn btn-primary mt-3"
+                    style={{ backgroundColor: '#9c27b0', borderColor: '#9c27b0' }}
+                  >
+                    Guardar datos bancarios
+                  </button>
+                </div>
+
+                {/* Monto disponible */}
+                <div className="bg-white border border-info-subtle rounded-4 shadow-sm p-3 mb-3">
+                  <h5 className="fw-semibold fs-6 mb-2 text-info">Monto disponible</h5>
+                  <p className="h4 text-primary fw-bold mb-3">${montoDisponible.toLocaleString()}</p>
+                  <button
+                    className="btn btn-success"
+                    disabled={montoDisponible === 0}
+                    onClick={manejarRetiro}
+                  >
+                    Retirar fondos
+                  </button>
+                </div>
+
+                {/* Comisión */}
+                <div className="bg-white border rounded-4 shadow-sm p-3">
+                  <h5 className="fw-semibold fs-6 mb-2">Comisión por suscripción</h5>
+                  <p className="small text-muted">Se aplica una comisión por cada suscripción:</p>
+                  <ul className="small text-muted ps-3">
+                    <li>🔹 Si el valor es menor o igual a $6 USD, se descuenta un <strong>5%</strong>.</li>
+                    <li>🔹 Si el valor es mayor a $6 USD, se descuenta un <strong>7%</strong>.</li>
+                  </ul>
+
+                  <div className="mt-3">
+                    <label className="form-label small text-muted">Valor de tu suscripción ($USD):</label>
+                    <input
+                      type="number"
+                      min="1"
+                      step="0.01"
+                      className="form-control w-50"
+                      value={valorSuscripcion}
+                      onChange={(e) => setValorSuscripcion(parseFloat(e.target.value))}
+                    />
+                    <p className="small text-muted mt-1">
+                      Recibirás aproximadamente: <strong>${calcularMontoFinal(valorSuscripcion).toFixed(2)}</strong> por suscriptor.
+                    </p>
+                  </div>
+                </div>
+
               </div>
             </div>
-          </section>
+          </div>
         </div>
       </main>
 
