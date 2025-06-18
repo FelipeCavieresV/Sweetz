@@ -78,20 +78,34 @@ export default function ExplorarCreadores() {
         </div>
       ))}
 
-      <div className="text-muted small mt-4">
-        <p className="mb-1">© 2025 Sweetz</p>
-        <div className="d-flex flex-wrap gap-2">
-          <a href="#" className="text-muted text-decoration-none">Términos de uso</a>
-          <a href="#" className="text-muted text-decoration-none">Política de Privacidad</a>
-          <a href="#" className="text-muted text-decoration-none">Política de Cookies</a>
-          <a href="#" className="text-muted text-decoration-none">Preguntas de Creador</a>
-          <a href="#" className="text-muted text-decoration-none">Preguntas de Usuario</a>
-          <a href="#" className="text-muted text-decoration-none">Reembolsos</a>
-          <a href="#" className="text-muted text-decoration-none">Contáctenos</a>
-          <a href="#" className="text-muted text-decoration-none">Blog</a>
-          <a href="#" className="text-muted text-decoration-none">🌐 Español</a>
+      <div className="text-center text-secondary mt-4" style={{ fontSize: '0.75rem' }}>
+        <p className="mb-2">© 2025 Sweetz</p>
+        <div className="d-flex flex-wrap justify-content-center gap-2">
+          {[
+            'Términos de uso',
+            'Política de Privacidad',
+            'Política de Cookies',
+            'Preguntas de Creador',
+            'Preguntas de Usuario',
+            'Reembolsos',
+            'Contáctenos',
+            'Blog',
+            '🌐 Español',
+          ].map((item, i) => (
+            <a
+              key={i}
+              href="#"
+              className="text-secondary text-decoration-none"
+              style={{ transition: 'color 0.2s ease-in-out', fontSize: '0.75rem' }}
+              onMouseOver={(e) => (e.currentTarget.style.color = '#8e24aa')}
+              onMouseOut={(e) => (e.currentTarget.style.color = '')}
+            >
+              {item}
+            </a>
+          ))}
         </div>
       </div>
+
     </div>
   )
 }

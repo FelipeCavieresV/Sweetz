@@ -90,11 +90,11 @@ function DropdownItem({
   return (
     <button
       onClick={onClick}
-      className={`btn w-100 d-flex align-items-center gap-2 text-start py-2 border-1 ${
-        active ? 'text-white' : 'text-dark'
-      }`}
+      className="btn w-100 d-flex align-items-center gap-2 text-start py-2 border-1"
       style={{
         backgroundColor: active ? '#8e24aa' : 'transparent',
+        color: active ? '#ffffff' : '#666', // Gris más claro
+        fontWeight: 'normal', // No bold
         transition: 'background-color 0.2s, color 0.2s',
         cursor: 'pointer',
       }}
@@ -107,12 +107,12 @@ function DropdownItem({
       onMouseOut={(e) => {
         if (!active) {
           e.currentTarget.style.backgroundColor = 'transparent'
-          e.currentTarget.style.color = '#333'
+          e.currentTarget.style.color = '#666'
         }
       }}
     >
       {icon}
-      <span className="fw-medium">{label}</span>
+      <span>{label}</span>
     </button>
   )
 }
