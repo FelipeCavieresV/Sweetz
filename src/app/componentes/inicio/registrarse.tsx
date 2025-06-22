@@ -2,7 +2,8 @@
 
 import { useState } from 'react'
 import { Dancing_Script } from 'next/font/google'
-import IniciarSesion from './componentes/inicio/inicioSesion'
+import IniciarSesion from '../../componentes/inicio/inicioSesion'
+import { createUserWithEmailAndPassword } from 'firebase/auth'
 
 const dancing = Dancing_Script({ subsets: ['latin'], weight: ['700'] })
 
@@ -13,18 +14,14 @@ export default function HomePage() {
   const [username, setUsername] = useState('')
   const [tipo, setTipo] = useState('suscriptor')
   const [error, setError] = useState('')
-  const [mostrarPassword, setMostrarPassword] = useState(false) // 👈 ESTA LÍNEA ERA NECESARIA
 
-  const handleRegistro = (e) => {
+  const handleRegistro = async (e) => {
     e.preventDefault()
-    if (!email || !password || !username) {
-      setError('Todos los campos son obligatorios')
-      return
+    try {
+      setMostrarRegistro(false)
+    } catch (err) {
+      setError(err.message)
     }
-
-    console.log('Usuario registrado:', { email, password, username, tipo })
-    alert('Registro simulado. Usuario guardado en consola.')
-    setMostrarRegistro(false)
   }
 
   return (
@@ -54,65 +51,25 @@ export default function HomePage() {
               }}
             />
 
-            <h5 className="text-center mb-4 fw-bold fs-3" style={{ color: '#6a1b9a' }}>Crear cuenta</h5>
+            <h5 className="text-center mb-3 fw-bold">Crear cuenta</h5>
 
             <form onSubmit={handleRegistro}>
-              <div className="form-floating mb-3">
-                <input
-                  type="text"
-                  className="form-control shadow-sm"
-                  id="inputUsuario"
-                  placeholder="Nombre de usuario"
-                  value={username}
-                  onChange={(e) => setUsername(e.target.value)}
-                  required
-                />
-                <label htmlFor="inputUsuario">👤 Nombre de usuario</label>
+              <div className="mb-3">
+                <label className="form-label">Nombre de usuario</label>
+                <input type="text" className="form-control" value={username} onChange={(e) => setUsername(e.target.value)} required />
+              </div>
+              <div className="mb-3">
+                <label className="form-label">Correo</label>
+                <input type="email" className="form-control" value={email} onChange={(e) => setEmail(e.target.value)} required />
+              </div>
+              <div className="mb-3">
+                <label className="form-label">Contraseña</label>
+                <input type="password" className="form-control" value={password} onChange={(e) => setPassword(e.target.value)} required />
               </div>
 
-              <div className="form-floating mb-3">
-                <input
-                  type="email"
-                  className="form-control shadow-sm"
-                  id="inputCorreo"
-                  placeholder="Correo electrónico"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  required
-                />
-                <label htmlFor="inputCorreo">📧 Correo</label>
-              </div>
-
-              <div className="form-floating mb-3 position-relative">
-                <input
-                  type={mostrarPassword ? 'text' : 'password'}
-                  className="form-control shadow-sm"
-                  id="inputPassword"
-                  placeholder="Contraseña"
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                  required
-                />
-                <label htmlFor="inputPassword">🔒 Contraseña</label>
-                <button
-                  type="button"
-                  className="btn btn-sm position-absolute top-50 end-0 translate-middle-y me-3 text-muted"
-                  onClick={() => setMostrarPassword(!mostrarPassword)}
-                  style={{ background: 'none', border: 'none' }}
-                >
-                  {mostrarPassword ? '🙈' : '👁️'}
-                </button>
-              </div>
-
-
-              {error && <p className="text-danger text-center small mb-3">{error}</p>}
-
-              <button
-                type="submit"
-                className="btn text-white w-100 py-3 fw-semibold"
-                style={{ backgroundColor: '#8e24aa' }}
-              >
-                💜 Registrarme
+              {error && <p className="text-danger small">{error}</p>}
+              <button type="submit" className="btn w-100 text-white" style={{ backgroundColor: '#8e24aa' }}>
+                Registrarme
               </button>
             </form>
 
@@ -129,7 +86,7 @@ export default function HomePage() {
           </div>
         </div>
       ) : (
-        <IniciarSesion setMostrarRegistro={setMostrarRegistro} />
+         <IniciarSesion setMostrarRegistro={setMostrarRegistro} />
       )}
 
       <footer className="bg-white bg-opacity-75 py-3 text-center small text-secondary mt-auto">

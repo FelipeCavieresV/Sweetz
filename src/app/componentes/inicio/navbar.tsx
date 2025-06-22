@@ -11,6 +11,8 @@ import {
   Star,
   LogOut,
   User,
+  Compass,
+  Bell,
 } from 'lucide-react'
 import { useRouter } from 'next/navigation'
 import { useState, useRef, useEffect } from 'react'
@@ -35,17 +37,14 @@ export default function Navbar() {
   }, [])
 
   return (
-    <header className="fixed top-0 left-0 w-full z-50 shadow-sm " style={{ backgroundColor: '#E8E3E7', height: '72px' }}>
+    <header className="fixed top-0 left-0 w-full z-50 shadow-sm" style={{ backgroundColor: '#E8E3E7', height: '72px' }}>
       <div className="container-fluid h-100 d-flex align-items-center justify-content-between px-3 px-md-4">
 
         {/* Botón izquierdo - Editar perfil */}
         <button
           className="btn btn-sm rounded-pill text-white fw-semibold"
           style={{ backgroundColor: '#8e24aa', fontSize: '12px', zIndex: 10 }}
-          onClick={() => {
-            console.log('Redirigiendo...')
-            router.push('/views/perfil/editarPerfil')
-          }}
+          onClick={() => router.push('/views/perfil/editarPerfil')}
         >
           ✏️ Editar perfil
         </button>
@@ -69,21 +68,10 @@ export default function Navbar() {
         <div className="d-flex align-items-center gap-3 ms-auto" style={{ zIndex: 100 }}>
           {/* Íconos */}
           <nav className="d-none d-sm-flex gap-3 text-muted">
-            <Home
-              className="cursor-pointer"
-              style={{ width: 20, height: 20 }}
-              onClick={() => router.push('/views/home/dashboard')}
-            />
-            <Mail
-              className="cursor-pointer"
-              style={{ width: 20, height: 20 }}
-              onClick={() => router.push('/views/home/dashboard/mensajes')} // puedes ajustar esta ruta también si deseas
-            />
-            <Activity
-              className="cursor-pointer"
-              style={{ width: 20, height: 20 }}
-              onClick={() => router.push('/views/home/activity')} // y esta también
-            />
+            <Home className="cursor-pointer" style={{ width: 20, height: 20 }} onClick={() => router.push('/views/home/dashboard')} />
+            <Mail className="cursor-pointer" style={{ width: 20, height: 20 }} onClick={() => router.push('/views/home/dashboard/mensajes')} />
+            <Compass className="cursor-pointer" style={{ width: 20, height: 20 }} onClick={() => router.push('/views/home/explorar')} />
+            <Bell className="cursor-pointer" style={{ width: 20, height: 20 }} onClick={() => router.push('/views/home/notificaciones')} />
           </nav>
 
           {/* Dropdown usuario */}
@@ -108,17 +96,19 @@ export default function Navbar() {
                 >
                   {/* Visible solo en móvil */}
                   <div className="d-block d-sm-none border-bottom p-2">
-                    <DropdownItem icon={<Home className="me-2" />} label="Inicio" />
-                    <DropdownItem icon={<Mail className="me-2" />} label="Mensajes" />
-                    <DropdownItem icon={<Activity className="me-2" />} label="Actividad" />
+                    <DropdownItem icon={<Home className="me-2" />} label="Inicio" onClick={() => router.push('/views/home/dashboard')} closeDropdown={() => setDropdownOpen(false)} />
+                    <DropdownItem icon={<Mail className="me-2" />} label="Mensajes" onClick={() => router.push('/views/home/dashboard/mensajes')} closeDropdown={() => setDropdownOpen(false)} />
+                    <DropdownItem icon={<Bell className="me-2" />} label="Notificaciones" onClick={() => router.push('/views/home/notificaciones')} closeDropdown={() => setDropdownOpen(false)} />
+                    <DropdownItem icon={<Compass className="me-2" />} label="Explorar" onClick={() => router.push('/views/home/explorar')} closeDropdown={() => setDropdownOpen(false)} />
+                    
                   </div>
 
-                  <DropdownItem icon={<DollarSign className="me-2" />} label="Billetera: $0.00" onClick={() => router.push('/views/perfil/billetera')} />
-                  <DropdownItem icon={<Users className="me-2" />} label="Mi perfil" onClick={() => router.push('/views/home/profile')} />
-                  <DropdownItem icon={<UserPlus className="me-2" />} label="Mis suscripciones" onClick={() => router.push('/views/home/dashboard')} />
-                  <DropdownItem icon={<Bookmark className="me-2" />} label="Marcadores" onClick={() => router.push('/views/home/dashboard')} />
-                  <DropdownItem icon={<Star className="me-2" />} label="¡Sé un creador!" onClick={() => router.push('/views/perfil/creador')} />
-                  <DropdownItem icon={<LogOut className="me-2" />} label="Cerrar sesión" onClick={() => router.push('/')} />
+                  <DropdownItem icon={<DollarSign className="me-2" />} label="Billetera: $0.00" onClick={() => router.push('/views/perfil/billetera')} closeDropdown={() => setDropdownOpen(false)} />
+                  <DropdownItem icon={<Users className="me-2" />} label="Mi perfil" onClick={() => router.push('/views/home/profile')} closeDropdown={() => setDropdownOpen(false)} />
+                  <DropdownItem icon={<UserPlus className="me-2" />} label="Mis suscripciones" onClick={() => router.push('/views/home/dashboard')} closeDropdown={() => setDropdownOpen(false)} />
+                  <DropdownItem icon={<Bookmark className="me-2" />} label="Marcadores" onClick={() => router.push('/views/home/dashboard')} closeDropdown={() => setDropdownOpen(false)} />
+                  <DropdownItem icon={<Star className="me-2" />} label="¡Sé un creador!" onClick={() => router.push('/views/perfil/creador')} closeDropdown={() => setDropdownOpen(false)} />
+                  <DropdownItem icon={<LogOut className="me-2" />} label="Cerrar sesión" onClick={() => router.push('/')} closeDropdown={() => setDropdownOpen(false)} />
                 </motion.div>
               )}
             </AnimatePresence>
@@ -133,15 +123,18 @@ function DropdownItem({
   icon,
   label,
   onClick,
+  closeDropdown,
 }: {
   icon: React.ReactNode
   label: string
   onClick?: () => void
+  closeDropdown?: () => void
 }) {
   return (
     <button
       onClick={() => {
         onClick?.()
+        closeDropdown?.()
       }}
       className="btn btn-link text-start text-dark w-100 d-flex align-items-center gap-2 px-3 py-2 text-decoration-none"
       style={{ fontSize: '14px' }}
