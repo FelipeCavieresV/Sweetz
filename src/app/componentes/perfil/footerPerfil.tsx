@@ -1,65 +1,84 @@
 'use client'
 
+import Image from 'next/image'
 import { Dancing_Script } from 'next/font/google'
 
 const dancing = Dancing_Script({ subsets: ['latin'], weight: ['700'] })
 
 export default function FooterPerfil() {
   return (
-    <footer className="border-t border-gray-200 py-10 px-4 text-sm text-gray-600 bg-white">
-      <div className="max-w-6xl mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8">
-        {/* Columna 1: Marca y redes */}
-        <div className="text-left"> {/* Aquí cambia de 'text-center' a 'text-left' */}
-          <h4
-            className={`${dancing.className} text-4xl sm:text-5xl text-[#8e24aa] mb-4 tracking-wide drop-shadow-[0_5px_10px_rgba(156,39,176,0.5)] hover:drop-shadow-[0_5px_20px_rgba(156,39,176,0.8)] transition-all duration-300 ease-in-out`}
-          >
-            Sweetz
-          </h4>
-          <p className="mb-3 text-gray-500">Síguenos en nuestras redes sociales</p>
-          <div className="flex space-x-4 text-gray-500 text-lg">
-            <a href="#" aria-label="Twitter">🐦</a>
-            <a href="#" aria-label="Facebook">📘</a>
-            <a href="#" aria-label="Instagram">📸</a>
-            <a href="#" aria-label="YouTube">▶️</a>
+    <footer className="border-t border-gray-200 bg-white text-sm text-gray-500 px-4 py-10">
+      <div className="container">
+        <div className="row gy-5">
+          {/* Columna 1: Marca y redes */}
+          <div className="col-12 col-sm-6 col-md-3">
+            <div className="mb-3">
+              <img src="/sweetzLogo.png" alt="Sweetz Logo" width="170" height="170" className="img-fluid" />
+            </div>
+            <p className="text-secondary small">Síguenos en nuestras redes</p>
+            <div className="d-flex gap-3 fs-5 text-muted">
+              <a href="#" aria-label="Twitter" className="link-secondary link-hover">🐦</a>
+              <a href="#" aria-label="Facebook" className="link-secondary link-hover">📘</a>
+              <a href="#" aria-label="Instagram" className="link-secondary link-hover">📸</a>
+              <a href="#" aria-label="YouTube" className="link-secondary link-hover">▶️</a>
+            </div>
+          </div>
+
+          {/* Columna 2: Acerca de */}
+          <div className="col-6 col-md-3">
+            <h6 className="text-uppercase text-muted fw-bold mb-2">Acerca de</h6>
+            <ul className="list-unstyled small text-secondary">
+              {[
+                'Términos de uso',
+                'Política de Privacidad',
+                'Política de Cookies',
+                'Preguntas de Creador',
+                'Preguntas de Usuario',
+                'Reembolsos',
+                'Contáctenos',
+                'Blog',
+              ].map((item, i) => (
+                <li key={i} className="mb-1">
+                  <a href="#" className="text-secondary text-decoration-none hover-opacity-75">{item}</a>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* Columna 3: Categorías */}
+          <div className="col-6 col-md-3">
+            <h6 className="text-uppercase text-muted fw-bold mb-2">Categorías</h6>
+            <ul className="list-unstyled small text-secondary">
+              <li>
+                <a href="#" className="text-secondary text-decoration-none hover-opacity-75">Explorar →</a>
+              </li>
+            </ul>
+          </div>
+
+          {/* Columna 4: Enlaces */}
+          <div className="col-12 col-md-3">
+            <h6 className="text-uppercase text-muted fw-bold mb-2">Enlaces</h6>
+            <ul className="list-unstyled small text-secondary">
+              {[
+                'Mi perfil',
+                'Editar perfil',
+                'Mis suscripciones',
+                'Cerrar sesión',
+              ].map((link, i) => (
+                <li key={i} className="mb-1">
+                  <a href="#" className="text-secondary text-decoration-none hover-opacity-75">{link}</a>
+                </li>
+              ))}
+            </ul>
           </div>
         </div>
 
-        {/* Columna 2: Acerca de */}
-        <div>
-          <h3 className="font-semibold text-gray-500 uppercase mb-2">Acerca de</h3>
-          <ul className="space-y-1 text-gray-500">
-            <li><a href="#">Términos de uso</a></li>
-            <li><a href="#">Política de Privacidad</a></li>
-            <li><a href="#">Política de Cookies</a></li>
-            <li><a href="#">Preguntas de Creador</a></li>
-            <li><a href="#">Preguntas de Usuario</a></li>
-            <li><a href="#">Reembolsos</a></li>
-            <li><a href="#">Contáctenos</a></li>
-            <li><a href="#">Blog</a></li>
-          </ul>
-        </div>
-
-        {/* Columna 3: Categorías */}
-        <div>
-          <h3 className="font-semibold text-gray-500 uppercase mb-2">Categorías</h3>
-          <ul className="space-y-1 text-gray-500">
-            <li><a href="#">Explorar →</a></li>
-          </ul>
-        </div>
-
-        {/* Columna 4: Enlaces */}
-        <div>
-          <h3 className="font-semibold text-gray-500 uppercase mb-2">Enlaces</h3>
-          <ul className="space-y-1 text-gray-500">
-            <li><a href="#">Mi perfil</a></li>
-            <li><a href="#">Editar perfil</a></li>
-            <li><a href="#">Mis suscripciones</a></li>
-            <li><a href="#">Cerrar sesión</a></li>
-          </ul>
-        </div>
+        <div className="text-center text-muted small mt-5">© 2025 Sweetz</div>
       </div>
 
-      <div className="text-center text-xs text-gray-500 mt-10">© 2025 Sweetz</div>
+      <div className="text-center text-xs text-gray-400 mt-10">
+        © 2025 Sweetz. Todos los derechos reservados.
+      </div>
     </footer>
   )
 }

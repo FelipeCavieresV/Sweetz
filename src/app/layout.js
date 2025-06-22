@@ -5,7 +5,7 @@ import './globals.css'
 import { Poppins } from 'next/font/google'
 import { usePathname } from 'next/navigation'
 import Navbar from './componentes/inicio/navbar'
-
+import 'bootstrap/dist/css/bootstrap.min.css';
 const poppins = Poppins({
   subsets: ['latin'],
   weight: ['400', '500', '600'],

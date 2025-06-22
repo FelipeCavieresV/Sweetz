@@ -1,7 +1,7 @@
 'use client'
 
-import { motion, AnimatePresence } from 'framer-motion'
 import { useState } from 'react'
+import { motion, AnimatePresence } from 'framer-motion'
 import { Dancing_Script } from 'next/font/google'
 
 const dancing = Dancing_Script({ subsets: ['latin'], weight: ['700'] })
@@ -10,40 +10,50 @@ export default function IniciarSesion() {
   const [mostrarPassword, setMostrarPassword] = useState(false)
 
   return (
-    <div className="flex items-center justify-center px-4 py-20">
-      <div className="bg-white/80 backdrop-blur-lg shadow-2xl p-10 rounded-3xl max-w-md w-full border border-gray-200">
-        <h1
-          className={`${dancing.className} text-5xl sm:text-6xl md:text-7xl text-[#8e24aa] mb-4 text-center tracking-wide drop-shadow-[0_5px_10px_rgba(156,39,176,0.5)] hover:drop-shadow-[0_5px_20px_rgba(156,39,176,0.8)] transition-all duration-300 ease-in-out`}
-        >
-          Sweetz
-        </h1>
+    <div className="d-flex justify-content-center align-items-center px-3 py-5">
+      <div
+        className="bg-white bg-opacity-75 backdrop-blur p-5 rounded-5 shadow border w-100"
+        style={{ maxWidth: '460px' }} // ← más ancho
+      >
+        <img
+          src="/sweetzLogo.png"
+          alt="Sweetz logo"
+          className="d-block mx-auto mb-4"
+          style={{
+            height: '80px',
+            objectFit: 'contain',
+            filter: 'drop-shadow(0 5px 10px rgba(156,39,176,0.5))',
+            transition: 'all 0.3s ease-in-out',
+          }}
+        />
 
-        <p className="text-base text-gray-600 mb-8 text-center">
+        <p className="text-center text-secondary mb-4 fs-6">
           ¡Atrévete y sé parte de la primera y más grande plataforma de venta de contenido digital en Chile!
         </p>
 
-        <div className="relative mb-5">
+        <div className="mb-3 position-relative">
           <input
             type="text"
+            className="form-control ps-5 py-3"
             placeholder="Nombre de usuario o correo"
-            className="w-full px-4 py-3 pl-10 text-black border border-gray-500 rounded-xl shadow-sm focus:outline-none focus:ring-2 focus:ring-[#8e24aa] hover:border-[#8e24aa] transition-all duration-300"
           />
-          <span className="absolute left-3 top-3.5 text-gray-400">📧</span>
+          <span className="position-absolute top-50 start-0 translate-middle-y ps-3 text-muted">📧</span>
         </div>
 
-        <div className="relative mb-5">
+        <div className="mb-3 position-relative">
           <input
             type={mostrarPassword ? 'text' : 'password'}
+            className="form-control ps-5 pe-5 py-3"
             placeholder="Contraseña"
-            className="w-full px-4 py-3 pl-10 pr-10 text-black border border-gray-500 rounded-xl shadow-sm focus:outline-none focus:ring-2 focus:ring-[#8e24aa] hover:border-[#8e24aa] transition-all duration-300"
           />
-          <span className="absolute left-3 top-3.5 text-gray-400">🔒</span>
+          <span className="position-absolute top-50 start-0 translate-middle-y ps-3 text-muted">🔒</span>
           <AnimatePresence mode="wait">
             <motion.button
               key={mostrarPassword ? 'hide' : 'show'}
               type="button"
+              className="btn btn-link btn-sm position-absolute top-50 end-0 translate-middle-y pe-3 text-muted"
+              style={{ textDecoration: 'none' }}
               onClick={() => setMostrarPassword(!mostrarPassword)}
-              className="absolute right-3 top-3.5 text-gray-500 hover:text-[#8e24aa] transition-colors"
               initial={{ opacity: 0, scale: 0.5 }}
               animate={{ opacity: 1, scale: 1 }}
               exit={{ opacity: 0, scale: 0.5 }}
@@ -54,28 +64,35 @@ export default function IniciarSesion() {
           </AnimatePresence>
         </div>
 
-        <div className="flex items-center justify-between text-sm mb-6">
-          <div className="flex items-center">
-            <input type="checkbox" id="mantener" className="mr-2" />
-            <label htmlFor="mantener" className="text-gray-700">Mantenerme conectado</label>
+        <div className="d-flex justify-content-between align-items-center mb-4 small">
+          <div className="form-check">
+            <input type="checkbox" className="form-check-input" id="mantener" />
+            <label className="form-check-label text-secondary" htmlFor="mantener">
+              Mantenerme conectado
+            </label>
           </div>
           <a
             href="#"
-            className="text-[#8e24aa] hover:text-[#ab47bc] font-semibold hover:underline transition-colors duration-200"
+            className="fw-semibold text-decoration-none"
+            style={{ color: '#8e24aa' }}
           >
             ¿Olvidaste tu contraseña?
           </a>
         </div>
 
-        <button className="w-full bg-[#8e24aa] hover:bg-[#9c27b0] transition-colors text-white font-semibold py-3 rounded-xl shadow-md cursor-pointer">
+        <button
+          className="btn btn-primary w-100 text-white fw-semibold py-3"
+          style={{ backgroundColor: '#8e24aa', border: 'none' }}
+        >
           Iniciar sesión
         </button>
 
-        <p className="mt-6 text-gray-600 text-center text-sm">
+        <p className="text-center text-secondary small mt-4">
           ¿No tienes cuenta?{' '}
           <a
             href="#"
-            className="text-[#8e24aa] font-bold hover:text-[#ab47bc] hover:underline transition-colors duration-200"
+            className="fw-bold text-decoration-none"
+            style={{ color: '#8e24aa' }}
           >
             ¡Regístrate ahora!
           </a>
